@@ -1,0 +1,32 @@
+name: lanagent
+label: LANAgent API
+kind: standalone
+version: 0.1.0
+description: >
+  The LANAgent API (api.lanagent.net) for Hermes: scraping, a web archive, video and
+  audio downloads, transcription, image generation, a code sandbox and ~100 more paid
+  services. Adds what MCP alone cannot: a one-command sign-in, waiting for download and
+  transcription jobs and saving their files locally, and a running count of credits spent.
+  After installing, run: hermes lanagent setup
+author: PortableDiag
+homepage: https://github.com/PortableDiag/lanagent-hermes
+platforms:
+  - linux
+  - macos
+provides_tools:
+  - lanagent_wait_job
+  - lanagent_fetch_file
+  - lanagent_spend
+provides_hooks:
+  - post_tool_call
+# Nothing is asked at install: `hermes lanagent setup` signs in and writes LANAGENT_API_KEY.
+optional_env:
+  - name: LANAGENT_API_KEY
+    description: "Your LANAgent API key (gsk_…); written by hermes lanagent setup"
+    prompt: "LANAgent API key"
+    password: true
+    secret: true
+  - name: LANAGENT_API_URL
+    description: "API base URL (default https://api.lanagent.net)"
+    prompt: "LANAgent API URL"
+    password: false
